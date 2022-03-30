@@ -18,20 +18,48 @@ document.addEventListener('DOMContentLoaded', () => {
             d["members"] = +d["members"]
         });
        
+
+        drawBarChart();
+        drawChord();
+        drawScatterPlot();
     });
 });
-function get_data(){
 
-    return([anime_data, connection_data])
 
-}
-function main()
-{
-    
-}
 
-const testFunction = () =>{
 
-    return(console.log('HI'))
+// 
+// 
+// 
+function drawScatterPlot(){
+
+    console.log('scatter plot')
+    // return([anime_data, connection_data])
 
 }
+
+
+// 
+// 
+// 
+function drawChord(){
+
+    console.log('chord')
+
+    // return([anime_data, connection_data])
+
+}
+
+
+
+// 
+// 
+// 
+function drawBarChart(){
+
+    console.log('bar chart')
+
+    // return([anime_data, connection_data])
+
+}
+
