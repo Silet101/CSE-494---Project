@@ -1,3 +1,5 @@
+import chordInit from './chord.js'
+
 var anime_data
 var connection_data
 document.addEventListener('DOMContentLoaded', () => {
@@ -31,4 +33,5 @@ function main()
 const testFunction = () =>{
 
     return(console.log('HI'))
+
 }
