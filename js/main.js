@@ -15,8 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
             d["rating"] = +d["rating"]
             d["members"] = +d["members"]
         });
-        console.log(schoolData)
-        tooltip = d3.select('#tooltip').style("opacity", 0)
        
     });
 });
