@@ -2,7 +2,7 @@ var anime_data
 var connection_data
 document.addEventListener('DOMContentLoaded', () => {
     // Load both files before doing anything else
-    Promise.all([d3.json('data/anime.csv'),
+    Promise.all([d3.csv('data/anime.csv'),
                  d3.csv('data/preproccesed_final_connections.csv')])
                  .then(function(values){
 
