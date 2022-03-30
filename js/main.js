@@ -29,3 +29,8 @@ function main()
 {
     
 }
+
+const testFunction = () =>{
+
+    return(console.log('HI'))
+}
