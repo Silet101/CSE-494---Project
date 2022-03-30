@@ -1,4 +1,4 @@
-import chordInit from './chord.js'
+// import chordInit from './chord.js'
 
 var anime_data
 var connection_data
