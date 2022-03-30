@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 function get_data(){
 
-    return [anime_data, connection_data]
+    return([anime_data, connection_data])
 
 }
 function main()
