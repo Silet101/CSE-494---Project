@@ -32,3 +32,5 @@ const testFunction = () =>{
 
     return(console.log('HI'))
 }
+
+export default testFunction;
