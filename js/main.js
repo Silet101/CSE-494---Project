@@ -27,6 +27,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+function redrawAll(){
+    
+    drawBarChart();
+    drawChord();
+    drawScatterPlot();
+}
+
+
 
 // 
 // 
