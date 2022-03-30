@@ -8,5 +8,4 @@ function chordInit()
     testFunction();
 };
 
-export default chordInit;
 
