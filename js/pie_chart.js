@@ -3,12 +3,10 @@ var lineWidth, lineHeight, lineInnerHeight, lineInnerWidth;
 var lineMargin = { top: 50, right: 60, bottom: 60, left: 100 };
 
 //Can modify this variable
-var chord_data;
+var pie_chart_data;
 
-function drawChord()
+function drawPieChart()
 {
-    chord_data = anime_data;
-    console.log('draw chord call success!');
-};
-
-
+    pie_chart_data = anime_data;
+    console.log('draw pie chart call success!');
+}
