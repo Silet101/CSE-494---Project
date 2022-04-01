@@ -23,7 +23,7 @@ function drawPieChart()
 
     pie_chart_data.forEach(function(data)
     {
-        console.log(data.name);
-        console.log(data[attribute] / attribute_total + "%");
+        //console.log(data.name);
+        //console.log(data[attribute] / attribute_total + "%");
     });
 }
