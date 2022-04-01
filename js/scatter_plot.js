@@ -18,7 +18,6 @@ function drawScatterPlot()
     scatter_data = anime_data;
     console.log('draw scatter plot call success!');
     scatterSvg = d3.select('#scatterPlotSVG');
-    var box_scatter = d3.select('')
     console.log(scatter_data);
     attribute_x = d3.select('#x-ScatterPlot').property('value')
     attribute_y = d3.select('#y-ScatterPlot').property('value')
