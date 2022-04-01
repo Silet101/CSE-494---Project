@@ -1,7 +1,7 @@
 //Do not change these variables! They will be used by other modules
 var scatterSvg;
-var lineWidth, lineHeight, lineInnerHeight, lineInnerWidth;
-var margin = { top: 50, right: 60, bottom: 60, left: 100 };
+var lineWidth, lineHeight, innerHeight, innerWidth;
+var margin = { top: 25, right: 25, bottom: 100, left: 100 };
 
 //This variable can be modified
 var scatter_data;
@@ -44,11 +44,11 @@ function drawScatterPlot()
 
     x_scale = d3.scaleLinear()
     .domain([min_val_x,max_val_x])
-    .range([0, innerWidth]);
+    .range([margin.left, lineWidth-margin.right]);
 
     y_scale = d3.scaleLinear()
     .domain([min_val_y,max_val_y])
-    .range([innerHeight - margin.bottom-margin.top , 0]);
+    .range([margin.top, lineHeight-margin.bottom]);
 
     const yAxis = d3.axisLeft(y_scale);
     yAxis_g
@@ -68,14 +68,18 @@ function initialize_chart(){
 
     scatterSvg = d3.select('#scatterPlotSVG');
     scatterSvg.selectAll('*').remove();
+    lineWidth = +scatterSvg.style('width').replace('px','');
+    lineHeight = +scatterSvg.style('height').replace('px','');;
+    innerWidth = lineWidth - margin.left - margin.right;
+    innerHeight = lineHeight - margin.top - margin.bottom;
+
     x_scale = d3.scaleLinear()
-            .domain([0,10])
-            .range([0, innerWidth]);
+        .domain([0,10])
+        .range([margin.left, lineWidth-margin.right]);
 
-     y_scale = d3.scaleLinear()
-         .domain([0,10])
-         .range([margin.top + innerHeight, 0]);
-
+    y_scale = d3.scaleLinear()
+        .domain([0,10])
+        .range([margin.top, lineHeight-margin.bottom]);
 
     const g = scatterSvg
 
