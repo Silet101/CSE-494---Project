@@ -4,6 +4,7 @@ var lineWidth, lineHeight, innerHeight, innerWidth;
 var margin = { top: 25, right: 100, bottom: 75, left: 100 };
 
 //This variable can be modified
+//i am fixing tyler fd me thanks -.-
 var scatter_data;
 var yaxis_label
 var xaxis_label
