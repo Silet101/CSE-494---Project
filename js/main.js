@@ -20,8 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         drawBarChart();
         // drawChord();
-        // drawScatterPlot();
-        // drawPieChart();
+        drawPieChart();
         initialize_chart();
         drawScatterPlot();
     });

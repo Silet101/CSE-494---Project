@@ -22,9 +22,11 @@ body{
     width:100%
 }
 
-#bar
+.bar
 {
     fill: red;
+    stroke: black;
+    stroke-width: 1px;
 }
 
 .chordChart{

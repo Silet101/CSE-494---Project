@@ -14,8 +14,8 @@ function drawBarChart()
                     .select('#histogram-area')
                     .select('.histogram')
                     .append('svg') 
-                        .attr('width', 800) //Will need to change these dimensions!
-                        .attr('height', 500);
+                        .attr('width', '100%') //Will need to change these dimensions!
+                        .attr('height', '100%');
     
     //Add g element to the div
     let histogram_area = area.append('g')
@@ -47,10 +47,10 @@ function drawBarChart()
     histogram_data.forEach(function(data)
     {
         histogram_area.append('rect')
-                        .attr('id', 'bar')
-                        .attr('y', yScale(+data[y_attribute]))
+                        .attr('class', 'bar')
                         .attr('height', yScale(0) - yScale(+data[y_attribute]))
                         .attr('width', 5) //Will probably change later
-                        .attr('transform', `translate(${xScale(+data[x_attribute]) - 2},0)`);
+                        .attr('x', xScale(+data[x_attribute]) - 2)
+                        .attr('y', yScale(+data[y_attribute]))
     });
 }
