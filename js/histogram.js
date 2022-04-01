@@ -47,6 +47,7 @@ function drawBarChart()
     histogram_data.forEach(function(data)
     {
         histogram_area.append('rect')
+                        .attr('id', 'bar')
                         .attr('y', yScale(+data[y_attribute]))
                         .attr('height', yScale(0) - yScale(+data[y_attribute]))
                         .attr('width', 5) //Will probably change later

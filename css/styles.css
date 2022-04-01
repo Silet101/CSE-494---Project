@@ -22,6 +22,10 @@ body{
     width:100%
 }
 
+#bar
+{
+    fill: red;
+}
 
 .chordChart{
     background-color:rgb(255, 188, 44); 
