@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         connection_data = values[1];
 
         anime_data.forEach(d => {
-            d.year = +d["episodes"]
+            d.episodes = +d["episodes"]
             d.rating = +d["rating"]
             d.members = +d["members"]
         });
@@ -22,5 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // drawScatterPlot();
         // drawPieChart();
         initialize_chart();
+        drawScatterPlot();
     });
 });
