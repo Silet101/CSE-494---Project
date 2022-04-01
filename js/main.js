@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
         connection_data = values[1];
 
         anime_data.forEach(d => {
-            d.year = +d["episodes"]
+            d.name = d["name"];
+            d.episodes = +d["episodes"]
             d.rating = +d["rating"]
             d.members = +d["members"]
         });
