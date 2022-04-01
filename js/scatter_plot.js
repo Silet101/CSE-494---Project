@@ -43,6 +43,10 @@ function drawScatterPlot()
         return d[attribute_y]
     })
 
+    max_val_size = d3.max(scatter_data, function(d){
+        return d[attribute_r]
+    })
+
     offset = 0.075
     net_diff_x = (max_val_x-min_val_x)*offset
     net_diff_y = (max_val_y-min_val_y)*offset
@@ -79,7 +83,36 @@ function drawScatterPlot()
         .duration(750)
         .call(xAxis)
 
-    
+    xaxis_label.text(attribute_x)
+    yaxis_label.text(attribute_y)
+
+    scatterSvg.selectAll('circle')
+        .data(anime_data, d => d.anime)
+      .join( enter => enter.append('circle')
+            .attr('cx', d => x_scale(d[attribute_x]) + margin.left)
+            .attr('cy', d => y_scale(d[attribute_y]) + margin.top)
+            .attr('id', d => d.anime)
+            .attr("fill", 'pink')
+            .attr("opacity",0.6)
+            .attr('stroke', 'black')
+            .attr("r",0)
+            .call(enter => enter.transition().duration(750)
+                .attr("r", d => (d[attribute_r]/max_val_size*16)+2)
+            )
+            ,
+      
+        update => update.attr("fill", 'pink')
+                    .call(update => update.transition().duration(750)
+                    .attr('cx', d=> x_scale(d[attribute_x]) + margin.left)
+                    .attr('cy', d=> y_scale(d[attribute_y]) + margin.top)
+                    .attr("r", d => (d[attribute_r]/max_val_size*27)+3)
+                    )
+        ,
+        exit => exit.style('fill','red')
+                    .call(exit => exit.transition()
+                            .attr('r',0)
+                            .remove()) 
+      )
 }
 function initialize_chart(){
 
