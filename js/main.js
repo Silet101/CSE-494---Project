@@ -18,9 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
        
 
-        drawBarChart();
-        drawChord();
+        // drawBarChart();
+        // drawChord();
+        // drawScatterPlot();
+        // drawPieChart();
+        initialize_chart();
         drawScatterPlot();
-        drawPieChart();
     });
 });
