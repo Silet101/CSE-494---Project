@@ -8,6 +8,8 @@ function drawBarChart()
 {
     histogram_data = anime_data;
     
+    //We need to grab the selected data from the chord
+
     let area = d3.select('.root')
                     .select('.container')
                     .select('.row')
@@ -24,13 +26,13 @@ function drawBarChart()
 
 
     //Not sure what these will be just yet...
-    let x_attribute = "episodes";
+    let x_attribute = "rating";
     let y_attribute = "members";
 
 
     //Get the scales setup for the histogram
     let xScale = d3.scaleLinear()
-                    .domain([0, d3.max(histogram_data.map(function(data){ return data[x_attribute]}))])
+                    .domain([-1.1, 10])
                     .range([0, 550]); //Change this!
 
     let yScale = d3.scaleLinear()

@@ -19,11 +19,10 @@ body{
 .scatterPlot{
     background-color:rgb(255, 188, 44); 
     height:500px;
-    width:100%
+    width: 100%
 }
 
-.bar
-{
+.bar{
     fill: red;
     stroke: black;
     stroke-width: 1px;
@@ -36,6 +35,11 @@ body{
 
 
 .histogram{
+    background-color:rgb(255, 188, 44); 
+    height:250px;
+}
+
+.piechart{
     background-color:rgb(255, 188, 44); 
     height:250px;
 }
