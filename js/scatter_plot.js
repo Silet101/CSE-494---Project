@@ -86,8 +86,6 @@ function drawScatterPlot()
     xaxis_label.text(attribute_x)
     yaxis_label.text(attribute_y)
 
-    //
-
     scatterSvg.selectAll('circle')
         .data(anime_data, d => d.name)
       .join( enter => enter.append('circle')

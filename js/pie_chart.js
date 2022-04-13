@@ -29,8 +29,7 @@ function drawPieChart(dataset)
                             {type:"OVA", number: 0}, 
                             {type:"Special", number: 0}, 
                             {type:"Music", number: 0}, 
-                            {type:"ONA", number: 0},
-                            {type:"Other", numver: 0}];
+                            {type:"ONA", number: 0}];
 
     subset_data.forEach(function(d)
     {
@@ -51,10 +50,6 @@ function drawPieChart(dataset)
 
         else if(d.type.includes("ONA"))
             category_data[5].number++;
-
-        else
-            category_data[6].number++;
-
     });
 
     var color = d3.scaleOrdinal()
@@ -67,14 +62,33 @@ function drawPieChart(dataset)
     var arc = d3.arc()
                     .innerRadius(0)
                     .outerRadius(100)
-    const arcs = pie(category_data);
+
+    var pie_labels = d3.arc()
+                        .innerRadius(50)
+                        .outerRadius(100);
+        
     
+    const arcs = pie(category_data);
+
     area.append('g')
-        .attr('stroke', 'white')
-        .selectAll('path')
-        .data(arcs)
-        .enter().append('path')
-        .attr('fill', d => color(d.value))
-        .attr("d", arc)
         .attr('transform', 'translate(360, 120)');
+        
+    
+    area.select('g')
+            .attr('stroke', 'white')
+            .selectAll('path')
+            .data(arcs)
+            .enter().append('path')
+            .attr('fill', d => color(d.value))
+            .attr("d", arc);
+                            
+    
+    area.select('g').selectAll('text')
+                    .data(arcs)
+                    .enter()
+                    .append('text')
+                    .text(function(d){return d.value})
+                    .attr('transform', function(d){return `translate(${pie_labels.centroid(d)})`})
+                    .style('text-anchor', 'middle')
+                    .style('font-size', 17);
 }
