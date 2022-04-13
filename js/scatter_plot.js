@@ -86,6 +86,8 @@ function drawScatterPlot()
     xaxis_label.text(attribute_x)
     yaxis_label.text(attribute_y)
 
+    //
+
     scatterSvg.selectAll('circle')
         .data(anime_data, d => d.name)
       .join( enter => enter.append('circle')
@@ -96,9 +98,10 @@ function drawScatterPlot()
             .attr("opacity",0.6)
             .attr('stroke', 'black')
             .attr("r",0)
-            .call(enter => enter.transition().duration(750)
-                .attr("r", d => (d[attribute_r]/max_val_size*16)+2)
-            )
+            .transition()
+            .duration(5000) //Applied transition to circles instead of entire svg
+            .attr("r", d => ((+d[attribute_r]/max_val_size*16)+2))
+            .selection()
             ,
       
         update => update.attr("fill", 'pink')
