@@ -97,13 +97,15 @@ function drawScatterPlot()
             .attr('stroke', 'black')
             .attr("r",0)
             .transition()
-            .duration(5000) //Applied transition to circles instead of entire svg
+            .duration(750) //Applied transition to circles instead of entire svg
             .attr("r", d => ((+d[attribute_r]/max_val_size*16)+2))
             .selection()
             ,
       
         update => update.attr("fill", 'pink')
-                    .call(update => update.transition().duration(750)
+                    .call(update => update.transition().duration(1000)
+                    .transition()
+                    .duration(750)
                     .attr('cx', d=> x_scale(d[attribute_x]) + margin.left)
                     .attr('cy', d=> y_scale(d[attribute_y]) + margin.top)
                     .attr("r", d => (d[attribute_r]/max_val_size*27)+3)
