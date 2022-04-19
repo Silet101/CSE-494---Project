@@ -26,12 +26,19 @@
 
             <div class="container">
                 <div class="row align-items-start">
-                    <div class="col-6" id="chord-area" style="padding-left:0;">
-                        <div class="chordChart cardShadowBox">Text</div>
+
+                    <!-- CHORD CHART -->
+                    <div class="col-6" style="padding-left:0;">
+                        <div id="chord-area" class="chordChart cardShadowBox">
+                            <svg id="chordPlotSVG" width="600px" height="500px"></svg>
+                        </div>
                     </div>
+
+                    <!-- HISTOGRAM -->
                     <div class="col-6" id="histogram-area" style="padding-right:0;">
                         <div class="histogram cardShadowBox"></div>
                     </div>
+
                     <!-- Testing Purposes!
                         <div class="col-12 viewContainer piechart-area">
                         <div>
@@ -39,6 +46,8 @@
                         </div>
                     </div>
                     -->
+
+                    <!-- Scatter Plot -->
                     <div class="col-12 viewContainer">
                         <div class="scatterPlot cardShadowBox" style="padding-left:0;">
                             <svg id="scatterPlotSVG" class="scatterPlot cardShadowBox"></svg>

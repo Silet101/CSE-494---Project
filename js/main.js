@@ -1,6 +1,8 @@
 var anime_data
 var connection_data
 var genre_list
+var tag_names
+
 document.addEventListener('DOMContentLoaded', () => {
     // Load both files before doing anything else
     Promise.all([d3.csv('data/anime.csv'),
@@ -13,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         anime_data = values[0];
         connection_data = values[1];
         genre_list = values[2];
+        tag_names = values[2];
 
         anime_data.forEach(d => {
             d.name = d["name"];
@@ -34,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
        
 
         drawBarChart();
-        // drawChord();
+        init_chord();
         drawPieChart(anime_data);
         initialize_chart();
         drawScatterPlot();
