@@ -29,8 +29,8 @@
 
                     <!-- CHORD CHART -->
                     <div class="col-6" style="padding-left:0;">
-                        <div id="chord-area" class="chordChart cardShadowBox">
-                            <svg id="chordPlotSVG" width="600px" height="500px"></svg>
+                        <div id="chord-area" class="histogram cardShadowBox" width="600px" height="500px">
+                            <!-- <svg id="chordPlotSVG" ></svg> -->
                         </div>
                     </div>
 
@@ -48,11 +48,22 @@
                     -->
 
                     <!-- Scatter Plot -->
-                    <div class="col-12 viewContainer">
+                    <div class="col-6 viewContainer">
                         <div class="scatterPlot cardShadowBox" style="padding-left:0;">
                             <svg id="scatterPlotSVG" class="scatterPlot cardShadowBox"></svg>
                         </div>
                     </div>
+
+
+                    <!-- CHORD CHART -->
+                    <div class="col-12" style="padding-left:0;">
+                        <div id="chord-area" class="chordChart cardShadowBox">
+                            <svg id="chordPlotSVG" width="1000px" height="1000px"></svg>
+                        </div>
+                    </div>
+
+
+
                   </div>
 
             </div>
@@ -89,6 +100,12 @@
                 <svg id="histogramSVG"></svg>
                 <svg id="chordSVG"></svg>
 
+            </div>
+
+
+            <div id='chordtooltip'>
+                <p id='tooltip__title'>0</p>
+                <p id='tooltip__data'></p>
             </div>
     </body>
 

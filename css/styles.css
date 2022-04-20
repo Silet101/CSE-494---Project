@@ -30,7 +30,9 @@ body{
 
 .chordChart{
     background-color:rgb(255, 188, 44); 
-    height:500px;
+    /* height:500px; */
+    min-height: 1000;
+    min-width: 1000;
 }
 
 
@@ -47,12 +49,12 @@ body{
 
 
 
-.link {
+/* .link {
     stroke: rgb(255, 35, 83);
     stroke-width:1px;
     stroke-opacity: 0.5;
     fill:none;
-}
+} */
 
 
 /* Chord Chart */
@@ -67,6 +69,8 @@ body{
   
   .link {
     stroke: steelblue;
+    stroke-width:1px;
+
     stroke-opacity: 0.4;
     fill: none;
     pointer-events: none;
@@ -98,4 +102,15 @@ body{
   
   .link--target {
     stroke: #2ca02c;
+  }
+
+
+  #chordtooltip {
+    border:1px solid gray;
+    border-radius:5px;
+    background-color: rgba(255, 255, 255, 0.384);
+    color: #000;
+    position:absolute;
+    padding:10px;
+    pointer-events: none;
   }

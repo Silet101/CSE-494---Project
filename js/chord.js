@@ -6,62 +6,28 @@ var svgSimple;
 var tags;
 var tags_link;
 
+var selectedTag = '';
+
 var lineWidth, lineHeight, lineInnerHeight, lineInnerWidth;
 var lineMargin = { top: 50, right: 60, bottom: 60, left: 100 };
 
-            let nodes = [
-                            { name: 'Leslie', sex: 'F' },
-                            { name: 'Ron', sex: 'M' },
-                            { name: 'Andy', sex: 'M' },
-                            { name: 'April', sex: 'F' },
-                            { name: 'Ben', sex: 'M' },
-                            { name: 'Tom', sex: 'M' },
-                            { name: 'Chris', sex: 'M' },
-                            { name: 'Ann', sex: 'F' },
-                            { name: 'Donna', sex: 'F' },
-                            { name: 'Jerry', sex: 'M' }
-                        ];
+let nodes = [];
 
 
-            // let nodes = [
-            //                 { name: 'Drama', sex: 'F' },
-            //                 { name: 'Romance', sex: 'M' },
-            //                 { name: 'School', sex: 'M' },
-            //                 { name: 'Supernatural', sex: 'F' },
-            //                 { name: 'Magic', sex: 'M' },
-            //                 { name: 'Military', sex: 'M' },
-            //                 { name: 'Shounen', sex: 'M' },
-            //                 { name: 'Fantasy', sex: 'F' },
-            //                 { name: 'Historical', sex: 'F' },
-            //                 { name: 'Parody', sex: 'M' }
-            //             ];
-
-            let links = [
-                            { source: 'Leslie', target: 'Ron' },
-                            { source: 'Leslie', target: 'Ben' },
-                            { source: 'Leslie', target: 'Ann' },
-                            { source: 'Ron', target: 'Chris' },
-                            { source: 'Ron', target: 'Donna' },
-                            { source: 'Ron', target: 'April' },
-                            { source: 'Ron', target: 'Jerry' },
-                            { source: 'Andy', target: 'April' },
-                            { source: 'Andy', target: 'Ann' },
-                            { source: 'Ben', target: 'Chris' },
-                            { source: 'Tom', target: 'Ann' },
-                            { source: 'Tom', target: 'Donna' },
-                            { source: 'Chris', target: 'Ann' }
-                        ];
+let links = [];
 
 //Can modify this variable
 var chord_data;
 
 function init_chord(){
 
+    d3.select('#chordtooltip').style("opacity", '0');
+
     svgSimple = d3.select('#chordPlotSVG');
     // svgWidth = svgSimple.node().clientWidth;
     // svgHeight = svgSimple.node().clientHeight;
-    svgWidth = 600;
-    svgHeight = 500;
+    svgWidth = 1000;
+    svgHeight = 1000;
 
     anime_data.forEach(d => {
         d.episodes = +d["episodes"]
@@ -70,17 +36,18 @@ function init_chord(){
     });
 
     
-
+    console.info('connection_data',connection_data)
     tags = tag_names.map((post, ind) => ({
         'name':post.genre_a
     }))
 
 
-    tags_link = connection_data.map((post, ind) => ({
-        'source':post.genre_a,
-        'target':post.genre_b,
+    tags_link = connection_data.map((ez, ind) => ({
+        'source':ez.genre_a,
+        'target':ez.genre_b,
+        'count':ez.count,
     }))
-    console.log('testing',tags_link);
+    console.info('testing',tags_link);
 
     links = tags_link;
 
@@ -91,7 +58,10 @@ function init_chord(){
 
     drawChord();
 
+
 };
+
+
 
 function drawChord()
 {
@@ -138,7 +108,7 @@ function drawChord()
         d.polarY = radius * Math.sin(theta)
     });
 
-    console.log(nodes)
+    console.info('Nodes',nodes)
     console.log('links',links)
 
     // Draw the nodes and links
@@ -149,31 +119,99 @@ function drawChord()
                 .style('fill', d => d.sex == 'F' ? 'khaki' : 'paleturquoise' )
                 .attr('cx', d => d.polarX)
                 .attr('cy', d => d.polarY)
-                .attr('r', 5); 
+                .attr('r', '15px')
+                .attr('data', d => d.name)
+                .on('mouseover', function(d,i) {
+
+                    // console.info(d)
+                    // Get the tag of hovered node
+                    let currentTag = d.target.attributes.data.value
+
+                    // move tooltip to hovered nodes position
+                    d3.select('#chordtooltip')
+                    .style("left", (d.pageX + 20) + "px")
+                    .style("top", (d.pageY - 25) + "px")
+                    .style("opacity", '1');
+
+                    circularG.selectAll(`.link`)
+                    // .style('stroke-width', '1px')
+                    .style('stroke-opacity', '0.1')
+
+                    // Highlight all links that have hovered tag in it
+                    circularG.selectAll(`.${currentTag}`)
+                    // .style('stroke-width', '3px')
+                    .style('stroke-opacity', '1')
+    
+                    d3.select('#tooltip__title').text(`Tag: ${currentTag} `);
+                    d3.select('#tooltip__data').text(`Some random stats`);
+                })
+                .on('mousemove', function(d,i) {
+
+                    d3.select('#chordtooltip')
+                    .style("left", (d.pageX + 10) + "px")
+                    .style("top", (d.pageY - 10) + "px")
+
+                })
+                .on('mouseout', function(d,i) {
+
+    
+                    // g.select(`#${sName}_state`).attr('stroke-width', '1px');
+                    circularG.selectAll(`.link`)
+                    // .style('stroke-width', '1px')
+                    .style('stroke-opacity', '0.4')
+
+                    d3.select('#chordtooltip')
+                    .style("opacity", '0')
+    
+                })
+                .on('click', function(d,i) {
+                    
+                    let currentTag = d.target.attributes.data.value
+
+                    circularG.selectAll(`.link`)
+                        // .style('stroke-width', '1px')
+                        .style('stroke-opacity', '0.1')
+
+                    circularG.selectAll(`.${currentTag}`)
+                        // .style('stroke-width', '3px')
+                        .style('stroke-opacity', '1')
+
+                })
 
 
 
+    let maxRadius = 500;
+    let maxLimit = 5.9;
+    let minLimit = 0.5;
     circularG.selectAll('.node-label')
                 .data(nodes)
                 .join('text')
                 .classed('node-label', true)
                 .attr('x', d => d.polarX)
                 .attr('y', d => d.polarY)
-                .text(d => d.name);
+                .attr('data', d => d.name)
+                .style('pointer-events', 'none')
+                .text(d => d.name)
                 
                 
     circularG.selectAll('.link')
                 .data(links)
                 .join('line')
-                .classed('link', true)
-                .attr('x1', d => d.source.polarX)
+                // .classed('link', true)
+                .attr("class", d => { return ` link ${d.source.name} ${d.target.name}` } )
+                .attr('x1', d => { return d.source.polarX } )
                 .attr('y1', d => d.source.polarY)
                 .attr('x2', d => d.target.polarX)
                 .attr('y2', d => d.target.polarY)
-                .attr('d', line); 
+                .attr('d', line)
+                .style('stroke-width', d => { return `${(d.count/maxRadius)*maxLimit + minLimit}px`})
+
+
+
 
 
 
     circularG.selectAll('.link').lower();
 
 };
+
