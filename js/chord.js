@@ -123,24 +123,25 @@ function drawChord()
                 .attr('data', d => d.name)
                 .on('mouseover', function(d,i) {
 
-                    // console.info(d)
+
                     // Get the tag of hovered node
-                    let currentTag = d.target.attributes.data.value
+                    let event = d3.event
+                    let currentTag = event.target.attributes.data.value
 
                     // move tooltip to hovered nodes position
                     d3.select('#chordtooltip')
-                    .style("left", (d.pageX + 20) + "px")
-                    .style("top", (d.pageY - 25) + "px")
-                    .style("opacity", '1');
+                        .style("left", (d.pageX + 20) + "px")
+                        .style("top", (d.pageY - 25) + "px")
+                        .style("opacity", '1');
 
                     circularG.selectAll(`.link`)
                     // .style('stroke-width', '1px')
-                    .style('stroke-opacity', '0.1')
+                        .style('stroke-opacity', '0.1')
 
                     // Highlight all links that have hovered tag in it
                     circularG.selectAll(`.${currentTag}`)
-                    // .style('stroke-width', '3px')
-                    .style('stroke-opacity', '1')
+                        // .style('stroke-width', '3px')
+                        .style('stroke-opacity', '1')
     
                     d3.select('#tooltip__title').text(`Tag: ${currentTag} `);
                     d3.select('#tooltip__data').text(`Some random stats`);
