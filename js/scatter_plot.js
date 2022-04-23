@@ -10,12 +10,12 @@ var xaxis_label
 var xAxis_g
 var yAxis_g
 
-function drawScatterPlot()
+function drawScatterPlot(data)
 {
     //It's important to set scatter data to the anime data here in the function
     //since the anime_data variable is initialized once the DOM content
     //is completely loaded.
-    scatter_data = anime_data;
+    scatter_data = data;
     console.log('draw scatter plot call success!');
     scatterSvg = d3.select('#scatterPlotSVG');
     console.log(scatter_data);
@@ -116,6 +116,33 @@ function drawScatterPlot()
                             .attr('r',0)
                             .remove()) 
       )
+
+    scatterSvg.selectAll("circle")
+      .data(all_countries_data_year)
+      .on('mouseover', function(d,i) {
+        current_selection = d3.select(`#${d.Country}`)
+        current_selection.attr('stroke-width', 3)
+        tooltip = d3.select('#tooltip').style("opacity", 1)
+        tooltip.html(`Country: ${d.Country} <br> ${x_feat}: ${d[x_feat]}
+        <br>${y_feat}: ${d[y_feat]} <br> ${size_feat}: ${d[size_feat]}`)
+            .style("left", (d3.event.pageX + 20) + "px")
+            .style("top", (d3.event.pageY - 25) + "px");
+
+    })           
+    .on('mousemove', function(d,i) {
+        current_selection = d3.select(`#${d.Country}`)
+        current_selection.attr('stroke-width', 3)
+        tooltip = d3.select('#tooltip')
+        tooltip.html(`Country: ${d.Country} <br> ${x_feat}: ${d[x_feat]}
+        <br>${y_feat}: ${d[y_feat]} <br> ${size_feat}: ${d[size_feat]}`)
+            .style("left", (d3.event.pageX + 20) + "px")
+            .style("top", (d3.event.pageY - 25) + "px");
+    })
+    .on('mouseout', function(d,i) {
+        current_selection = d3.select(`#${d.Country}`)
+        current_selection.attr('stroke-width', 1)
+        d3.select('#tooltip').style("opacity", 0)
+    });
 }
 function initialize_chart(){
 
