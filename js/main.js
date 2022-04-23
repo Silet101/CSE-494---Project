@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
    
        
 
-        drawBarChart();
+        //drawBarChart();
         init_chord();
         drawPieChart(anime_data);
         initialize_chart();

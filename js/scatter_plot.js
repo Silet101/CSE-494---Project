@@ -91,7 +91,7 @@ function drawScatterPlot(data)
       .join( enter => enter.append('circle')
             .attr('cx', d => x_scale(d[attribute_x]) + margin.left)
             .attr('cy', d => y_scale(d[attribute_y]) + margin.top)
-            .attr('id', d => d.anime)
+            .attr('id', d => d.anime_id)
             .attr("fill", 'pink')
             .attr("opacity",0.6)
             .attr('stroke', 'black')
@@ -118,30 +118,30 @@ function drawScatterPlot(data)
       )
 
     scatterSvg.selectAll("circle")
-      .data(all_countries_data_year)
+      .data(scatter_data)
       .on('mouseover', function(d,i) {
-        current_selection = d3.select(`#${d.Country}`)
+        current_selection = d3.select(`#${d.anime_id}`)
         current_selection.attr('stroke-width', 3)
-        tooltip = d3.select('#tooltip').style("opacity", 1)
-        tooltip.html(`Country: ${d.Country} <br> ${x_feat}: ${d[x_feat]}
-        <br>${y_feat}: ${d[y_feat]} <br> ${size_feat}: ${d[size_feat]}`)
+        tooltip = d3.select('#scattertooltip').style("opacity", 1)
+        tooltip.html(`Name: ${d.name} <br> ${attribute_x}: ${d[attribute_x]}
+        <br>${attribute_y}: ${d[attribute_y]} <br> ${attribute_r}: ${d[attribute_r]}`)
             .style("left", (d3.event.pageX + 20) + "px")
             .style("top", (d3.event.pageY - 25) + "px");
 
     })           
     .on('mousemove', function(d,i) {
-        current_selection = d3.select(`#${d.Country}`)
+        current_selection = d3.select(`#${d.anime_id}`)
         current_selection.attr('stroke-width', 3)
-        tooltip = d3.select('#tooltip')
-        tooltip.html(`Country: ${d.Country} <br> ${x_feat}: ${d[x_feat]}
-        <br>${y_feat}: ${d[y_feat]} <br> ${size_feat}: ${d[size_feat]}`)
+        tooltip = d3.select('#scattertooltip').style("opacity", 1)
+        tooltip.html(`Name: ${d.name} <br> ${attribute_x}: ${d[attribute_x]}
+        <br>${attribute_y}: ${d[attribute_y]} <br> ${attribute_r}: ${d[attribute_r]}`)
             .style("left", (d3.event.pageX + 20) + "px")
             .style("top", (d3.event.pageY - 25) + "px");
     })
     .on('mouseout', function(d,i) {
-        current_selection = d3.select(`#${d.Country}`)
+        current_selection = d3.select(`#${d.anime_id}`)
         current_selection.attr('stroke-width', 1)
-        d3.select('#tooltip').style("opacity", 0)
+        d3.select('#scattertooltip').style("opacity", 0)
     });
 }
 function initialize_chart(){
