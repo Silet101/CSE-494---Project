@@ -40,6 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
         init_chord();
         drawPieChart(anime_data);
         initialize_chart();
-        drawScatterPlot();
+        drawScatterPlot(anime_data);
     });
 });
