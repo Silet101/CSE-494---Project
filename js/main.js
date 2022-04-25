@@ -73,20 +73,12 @@ function updatedCharts(selectedTag='unselected')
     console.info('sdsd', filteredAnime)
     if (selectedTag=='unselected'){
         initialize_chart();
-        drawScatterPlot(anime_data);
+        drawScatterPlot(filteredAnime);
     }
     else{
 
 
-
-
-
-
-
-
-
-
         initialize_chart();
-        drawScatterPlot(anime_data);
+        drawScatterPlot(filteredAnime);
     }
 }
