@@ -56,3 +56,10 @@ document.addEventListener('DOMContentLoaded', () => {
         drawScatterPlot(genre_selection);
     });
 });
+
+
+function updatedCharts(selectedTag='unselected')
+{
+
+
+}
