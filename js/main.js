@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
        
 
-        //drawBarChart();
+        drawBarChart();
         init_chord();
         drawPieChart(genre_selection);
         initialize_chart();

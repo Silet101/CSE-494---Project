@@ -2,24 +2,18 @@
 var lineWidth, lineHeight, lineInnerHeight, lineInnerWidth;
 var lineMargin = { top: 50, right: 60, bottom: 60, left: 100 };
 
-const inner_width = 50;
-const outer_width = 150;
-const bar_width = 0.5;
-
 let bin = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 //Can modify this variable
 var histogram_data;
-function drawBarChart(data_subset)
+function drawBarChart(dataset)
 {
-    histogram_data = data_subset;
+    histogram_data = dataset;
     histogram_data = anime_data;
     
-    //Not sure what these will be just yet...
     let x_attribute = "rating";
     let y_attribute = "members";
 
-    //We need to grab the selected data from the chord
     histogram_data.forEach(function(data)
     {
         bin[Math.floor(+data[x_attribute])] += +data[y_attribute];
@@ -31,49 +25,57 @@ function drawBarChart(data_subset)
                     .select('#histogram-area')
                     .select('.histogram')
                     .append('svg') 
-                        .attr('width', '100%') //Will need to change these dimensions!
-                        .attr('height', '100%');
+                        .attr('width', 800) //Will need to change these dimensions!
+                        .attr('height', 500);
     
     //Add g element to the div
     let histogram_area = area.append('g')
                         .attr('id', 'histogram-graph')
-                        .attr('transform', `translate(170, 120)`); //Will probably need to change these as well!
-
-    let yScale = d3.scaleRadial()
-                        .domain([0, d3.max(bin)])
-                        .range([inner_width, outer_width]); //Change this!
+                        .attr('transform', `translate(80, 10)`);
 
 
     //Get the scales setup for the histogram
-    let xScale = d3.scaleBand()
-                    .domain([-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-                    .align(0)
-                    .range([0, 2 * Math.PI]);
+    let xScale = d3.scaleLinear()
+                    .domain([-1.1, d3.max(histogram_data.map(function(data){ return data[x_attribute]}))])
+                    .range([0, 550]); //Change this!
 
-    /*
-    let xAxis = d3.axisBottom(xScale);
+    let yScale = d3.scaleLinear()
+                    .domain([Math.max(...bin), 0])
+                    .range([0, 420]); //Change this!
+
+    let xAxis = d3.axisBottom(xScale)
+                   
     let yAxis = d3.axisLeft(yScale)
                     .tickFormat(d3.format(".2s"));
 
     histogram_area.append('g').call(xAxis)
-                                .attr('transform', `translate(0, 200)`)
-                                .attr('id', 'x-axis');
+                                .attr('transform', `translate(0, 420)`)
+                                .attr('class', 'axis');
     histogram_area.append('g').call(yAxis)
-                                .attr('id', 'y-axis');
+                                .attr('class', 'axis');
 
-    */
-    var index = -1;
-    histogram_area.append('g').selectAll('path')
-            .data(bin)
-            .enter()
-            .append('path')
-                .attr('fill', "#69b3a2")
-                .attr("d", d3.arc()
-                    .innerRadius(50)
-                    .outerRadius(function(d){ console.log(yScale(d)); return yScale(d); })
-                    .startAngle(function(){ console.log(index); console.log(xScale(index)); return xScale(index); })
-                    .endAngle(function(d, i) { return (xScale(index++) + bar_width);})
-                    .padAngle(0.01)
-                    .padRadius(50)
-                );
+    for(var i = 0; i < 12; i++)
+    {
+        histogram_area.append('rect')
+                        .attr('id', 'bar')
+                        .attr('y', yScale(bin[i]))
+                        .attr('height', yScale(0) - yScale(bin[i]))
+                        .attr('width', 5) //Will probably change later
+                        .attr('transform', `translate(${xScale((i - 1)) - 2},0)`);
+    }
+
+    histogram_area.append('text')
+                    .text('Ratings')
+                    .attr('x', 280)
+                    .attr('y', 450)
+                    .attr('dy', '15px');
+
+
+    histogram_area.append('text')
+                    .text('Members')
+                    .attr('x', -230)
+                    .attr('y', -60)
+                    .attr('transform', 'rotate(-90)')
+                    .attr('dy', '15px');
+    
 }

@@ -22,8 +22,20 @@ body{
     width: 100%
 }
 
-.bar{
-    fill: red;
+.axis line{
+  stroke: black;
+}
+
+.axis path{
+  stroke: black;
+}
+
+.axis text{
+  fill: black;
+}
+
+#bar{
+    fill: steelblue;
     stroke: black;
     stroke-width: 1px;
 }
