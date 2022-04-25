@@ -125,8 +125,8 @@ function drawChord()
 
 
                     // Get the tag of hovered node
-                    let event = d3.event
-                    let currentTag = event.target.attributes.data.value
+                    let event = d3.event;
+                    let currentTag = event.target.attributes.data.value;
 
                     // move tooltip to hovered nodes position
                     d3.select('#chordtooltip')
