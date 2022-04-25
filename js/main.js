@@ -60,6 +60,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function updatedCharts(selectedTag='unselected')
 {
+    let filteredAnime = [];
+    anime_data.forEach((d,i) => {
+        if (d.genre.includes(selectedTag)){
+
+            filteredAnime.push(d);
+        }
+            
+    });
 
 
+    console.info('sdsd', filteredAnime)
+    if (selectedTag=='unselected'){
+        initialize_chart();
+        drawScatterPlot(anime_data);
+    }
+    else{
+
+
+
+
+
+
+
+
+
+
+        initialize_chart();
+        drawScatterPlot(anime_data);
+    }
 }
