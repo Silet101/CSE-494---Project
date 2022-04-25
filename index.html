@@ -27,11 +27,35 @@
             <div class="container">
                 <div class="row align-items-start">
 
-                    <!-- CHORD CHART -->
+                    <!-- Scatter Plot -->
                     <div class="col-6" style="padding-left:0;">
-                        <div id="chord-area" class="histogram cardShadowBox" width="600px" height="500px">
-                            <!-- <svg id="chordPlotSVG" ></svg> -->
+
+                        <div class="scatterPlot cardShadowBox" style="padding-left:0;">
+                            <svg id="scatterPlotSVG" class="scatterPlot cardShadowBox"></svg>
                         </div>
+
+
+                        <div class="scatter-controller">
+                            <select id="x-ScatterPlot" onChange="updatedCharts()">
+                                <option value="episodes">Episodes</option>
+                                <option value="rating">Ratings</option>
+                                <option value="members">Members</option>
+                            </select>
+            
+                            <select id="y-ScatterPlot" onChange="updatedCharts()">
+                                <option value="episodes">Episodes</option>
+                                <option value="rating">Ratings</option>
+                                <option value="members">Members</option>
+                            </select>
+            
+                            <select id="r-ScatterPlot" onChange="updatedCharts()">
+                                <option value="episodes">Episodes</option>
+                                <option value="rating">Ratings</option>
+                                <option value="members">Members</option>
+                            </select>
+                        </div>
+
+
                     </div>
 
                     <!-- HISTOGRAM -->
@@ -39,34 +63,9 @@
                         <div class="histogram cardShadowBox"></div>
                     </div>
                     
-                    <!-- Scatter Plot -->
-                    <div class="col-6 viewContainer">
-                        <div class="scatterPlot cardShadowBox" style="padding-left:0;">
-                            <svg id="scatterPlotSVG" class="scatterPlot cardShadowBox"></svg>
-                        </div>
-                    </div>
-
-                    <div>
-                        <select id="x-ScatterPlot" onChange="drawScatterPlot()">
-                            <option value="episodes">Episodes</option>
-                            <option value="rating">Ratings</option>
-                            <option value="members">Members</option>
-                        </select>
-        
-                        <select id="y-ScatterPlot" onChange="drawScatterPlot()">
-                            <option value="episodes">Episodes</option>
-                            <option value="rating">Ratings</option>
-                            <option value="members">Members</option>
-                        </select>
-        
-                        <select id="r-ScatterPlot" onChange="drawScatterPlot()">
-                            <option value="episodes">Episodes</option>
-                            <option value="rating">Ratings</option>
-                            <option value="members">Members</option>
-                        </select>
-                    </div>
 
 
+                    <div class="spacer" />
                     <!-- CHORD CHART -->
                     <div class="col-12" style="padding-left:0;">
                         <div id="chord-area" class="chordChart cardShadowBox">
@@ -98,8 +97,11 @@
 
 
             <div id='chordtooltip'>
+
                 <p id='tooltip__title'>0</p>
+
                 <p id='tooltip__data'></p>
+                
             </div>
             <div id='scattertooltip'>
                 

@@ -88,10 +88,8 @@ body{
     pointer-events: none;
   }
   
-  .node:hover,
-  .node--source,
-  .node--target {
-    font-weight: 700;
+  /* .node:hover{
+    fill: #2ca02c;
   }
   
   .node--source {
@@ -114,7 +112,7 @@ body{
   
   .link--target {
     stroke: #2ca02c;
-  }
+  } */
 
 
   #chordtooltip {
@@ -135,4 +133,15 @@ body{
     position:absolute;
     padding:10px;
     pointer-events: none;
+  }
+
+
+  .scatter-controller{
+    position: absolute;
+    bottom: 10px;
+    left: 60px;
+  }
+  
+  .spacer{
+    margin: 25px 0 0 0 ;
   }

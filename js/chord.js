@@ -6,7 +6,7 @@ var svgSimple;
 var tags;
 var tags_link;
 
-var selectedTag = 'unselected';
+var currentSelectedTag = 'unselected';
 
 var lineWidth, lineHeight, lineInnerHeight, lineInnerWidth;
 var lineMargin = { top: 50, right: 60, bottom: 60, left: 100 };
@@ -123,17 +123,46 @@ function drawChord()
 
                 .on('mouseover', function(d,i) {
 
-                    selectedTag
-
 
                     // Get the tag of hovered node
                     let event = d3.event;
                     let currentTag = event.target.attributes.data.value;
 
+                    let filteredAnime = []
+
+                    anime_data.forEach(d => {
+
+                        if ( d.genre.includes(currentTag) && !d.genre.includes('Hentai') ){
+                            filteredAnime.push(d);
+                        }
+
+                    });
+
+                    let top5Anime = filteredAnime.slice(0,5).sort((a, b) => d3.descending(+a.rating, +b.rating));
+                    let bottom5Anime = filteredAnime.slice(filteredAnime.length-5,filteredAnime.length).sort((a, b) => d3.descending(+a.rating, +b.rating));
+
+                    let top5AnimeNames = '';
+                    let bottom5AnimeNames = '';
+                    top5Anime.forEach(d => {
+
+                        top5AnimeNames += ` ${d.name} - `
+
+
+                    });
+                    
+                    bottom5Anime.forEach(d => {
+
+                        bottom5AnimeNames += ` ${d.name} - `
+
+                    });
+
+                    console.log('top5', top5Anime)
+                    console.log('bottom5', bottom5Anime)
                     // move tooltip to hovered nodes position
+
                     d3.select('#chordtooltip')
-                        .style("left", (d.pageX + 20) + "px")
-                        .style("top", (d.pageY - 25) + "px")
+                        .style("left", (d3.event.pageX + 20) + "px")
+                        .style("top", (d3.event.pageY - 25) + "px")
                         .style("opacity", '1');
 
                     circularG.selectAll(`.link`)
@@ -145,43 +174,44 @@ function drawChord()
                         // .style('stroke-width', '3px')
                         .style('stroke-opacity', '1')
     
-                    d3.select('#tooltip__title').text(`Tag: ${currentTag} `);
-                    d3.select('#tooltip__data').text(`Some random stats`);
+                    d3.select('#tooltip__title').text(`Top 5: ${top5AnimeNames} `);
+                    d3.select('#tooltip__data').text(`Bottom 5: ${bottom5AnimeNames}`);
                 })
                 .on('mousemove', function(d,i) {
 
                     d3.select('#chordtooltip')
-                    .style("left", (d.pageX + 10) + "px")
-                    .style("top", (d.pageY - 10) + "px")
+                    .style("left", (d3.event.pageX + 10) + "px")
+                    .style("top", (d3.event.pageY - 10) + "px")
 
                 })
                 .on('mouseout', function(d,i) {
 
-                    if(selectedTag == 'unselected'){
-                        // g.select(`#${sName}_state`).attr('stroke-width', '1px');
-                        circularG.selectAll(`.link`)
-                        // .style('stroke-width', '1px')
-                        .style('stroke-opacity', '0.4')
+                    if(currentSelectedTag == 'unselected'){
 
-                        d3.select('#chordtooltip')
-                        .style("opacity", '0')
+                        circularG.selectAll(`.link`)
+                            .style('stroke-opacity', '0.4')
+
+
                     }
                     else{
                         circularG.selectAll(`.link`)
                             // .style('stroke-width', '1px')
                             .style('stroke-opacity', '0.1')
 
-                        circularG.selectAll(`.${selectedTag}`)
+                        circularG.selectAll(`.${currentSelectedTag}`)
                             // .style('stroke-width', '3px')
                             .style('stroke-opacity', '1')
                     }
+
+                    d3.select('#chordtooltip')
+                        .style("opacity", '0')
     
                 })
                 .on('click', function(d,i) {
                     
                     let currentTag = d3.event.target.attributes.data.value
 
-                    selectedTag=currentTag;
+                    currentSelectedTag=currentTag;
 
                     circularG.selectAll(`.link`)
                         // .style('stroke-width', '1px')
@@ -199,7 +229,7 @@ function drawChord()
                         // .style('stroke-width', '3px')
                         .style('fill', '#11abad')
                         
-                        updatedCharts(selectedTag=currentTag);
+                        updatedCharts();
                 })
 
 

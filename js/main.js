@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-function updatedCharts(selectedTag='unselected')
+function updatedCharts(selectedTag=currentSelectedTag)
 {
     //SliceOfLife needs a space for the filtration system!
 
