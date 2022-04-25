@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
             d.episodes = +d["episodes"]
             d.rating = +d["rating"]
             d.members = +d["members"]
+            d.genre = d["genre"];
         });
 
         connection_data.forEach(d => {
@@ -34,12 +35,24 @@ document.addEventListener('DOMContentLoaded', () => {
             d.genre = d['genre_a'];
         });
    
+
+        //System to filer the chord data
+        let chord_chart_genre = "unselected";
+        let genre_selection = anime_data.filter(function(data)
+        { 
+            if(chord_chart_genre != "unselected")
+            {
+                return(data.genre.includes(chord_chart_genre)); 
+            }
+
+            return true;
+        });
        
 
         //drawBarChart();
         init_chord();
-        drawPieChart(anime_data);
+        drawPieChart(genre_selection);
         initialize_chart();
-        drawScatterPlot(anime_data);
+        drawScatterPlot(genre_selection);
     });
 });
