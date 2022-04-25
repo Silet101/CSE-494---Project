@@ -18,6 +18,8 @@ function drawScatterPlot(data)
     scatter_data = data;
     console.log('draw scatter plot call success!');
     scatterSvg = d3.select('#scatterPlotSVG');
+    scatterSvg.selectAll('*').remove();
+    initialize_chart()
     console.log(scatter_data);
     attribute_x = d3.select('#x-ScatterPlot').property('value')
     attribute_y = d3.select('#y-ScatterPlot').property('value')
@@ -87,7 +89,7 @@ function drawScatterPlot(data)
     yaxis_label.text(attribute_y)
 
     scatterSvg.selectAll('circle')
-        .data(anime_data, d => d.name)
+        .data(scatter_data, d => d.name)
       .join( enter => enter.append('circle')
             .attr('cx', d => x_scale(d[attribute_x]) + margin.left)
             .attr('cy', d => y_scale(d[attribute_y]) + margin.top)

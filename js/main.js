@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         drawBarChart(anime_data);
         init_chord();
-        initialize_chart();
         drawScatterPlot(anime_data);
     });
 });
