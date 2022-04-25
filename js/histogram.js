@@ -9,7 +9,6 @@ var histogram_data;
 function drawBarChart(dataset)
 {
     histogram_data = dataset;
-    histogram_data = anime_data;
     
     let x_attribute = "rating";
     let y_attribute = "members";
@@ -18,6 +17,15 @@ function drawBarChart(dataset)
     {
         bin[Math.floor(+data[x_attribute])] += +data[y_attribute];
     });
+
+    //If called after initialization, remove the svg and regenerate
+    d3.select('.root')
+        .select('.container')
+        .select('.row')
+        .select('#histogram-area')
+        .select('.histogram')
+        .select('svg')
+        .remove();
 
     let area = d3.select('.root')
                     .select('.container')
@@ -36,7 +44,7 @@ function drawBarChart(dataset)
 
     //Get the scales setup for the histogram
     let xScale = d3.scaleLinear()
-                    .domain([-1.1, d3.max(histogram_data.map(function(data){ return data[x_attribute]}))])
+                    .domain([-1.1, 10])
                     .range([0, 550]); //Change this!
 
     let yScale = d3.scaleLinear()
