@@ -6,7 +6,7 @@ var svgSimple;
 var tags;
 var tags_link;
 
-var selectedTag = '';
+var selectedTag = 'unselected';
 
 var lineWidth, lineHeight, lineInnerHeight, lineInnerWidth;
 var lineMargin = { top: 50, right: 60, bottom: 60, left: 100 };
@@ -77,9 +77,7 @@ function drawChord()
 
 
     
-    function updateLayout2() {
-
-   }
+    function updateLayout2() {}
 
    var line = d3.radialLine()
    .curve(d3.curveBundle.beta(0.85))
@@ -115,13 +113,17 @@ function drawChord()
     circularG.selectAll('.node')
                 .data(nodes)
                 .join('circle')
-                .classed('node', true)
+                // .classed('node', true)
                 .style('fill', d => d.sex == 'F' ? 'khaki' : 'paleturquoise' )
                 .attr('cx', d => d.polarX)
                 .attr('cy', d => d.polarY)
                 .attr('r', '15px')
                 .attr('data', d => d.name)
+                .attr("class", d => { return ` node n-${d.name}` } )
+
                 .on('mouseover', function(d,i) {
+
+                    selectedTag
 
 
                     // Get the tag of hovered node
@@ -155,28 +157,49 @@ function drawChord()
                 })
                 .on('mouseout', function(d,i) {
 
-    
-                    // g.select(`#${sName}_state`).attr('stroke-width', '1px');
-                    circularG.selectAll(`.link`)
-                    // .style('stroke-width', '1px')
-                    .style('stroke-opacity', '0.4')
+                    if(selectedTag == 'unselected'){
+                        // g.select(`#${sName}_state`).attr('stroke-width', '1px');
+                        circularG.selectAll(`.link`)
+                        // .style('stroke-width', '1px')
+                        .style('stroke-opacity', '0.4')
 
-                    d3.select('#chordtooltip')
-                    .style("opacity", '0')
+                        d3.select('#chordtooltip')
+                        .style("opacity", '0')
+                    }
+                    else{
+                        circularG.selectAll(`.link`)
+                            // .style('stroke-width', '1px')
+                            .style('stroke-opacity', '0.1')
+
+                        circularG.selectAll(`.${selectedTag}`)
+                            // .style('stroke-width', '3px')
+                            .style('stroke-opacity', '1')
+                    }
     
                 })
                 .on('click', function(d,i) {
                     
-                    let currentTag = d.target.attributes.data.value
+                    let currentTag = d3.event.target.attributes.data.value
+
+                    selectedTag=currentTag;
 
                     circularG.selectAll(`.link`)
                         // .style('stroke-width', '1px')
                         .style('stroke-opacity', '0.1')
 
                     circularG.selectAll(`.${currentTag}`)
-                        // .style('stroke-width', '3px')
                         .style('stroke-opacity', '1')
 
+                    // set all nodes to default color
+                    circularG.selectAll(`.node`)
+                        .style('fill', '#aeedee')
+
+                    // Set selected node to selected color
+                    circularG.selectAll(`.n-${currentTag}`)
+                        // .style('stroke-width', '3px')
+                        .style('fill', '#11abad')
+                        
+                        updatedCharts(selectedTag=currentTag);
                 })
 
 
