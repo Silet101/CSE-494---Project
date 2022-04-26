@@ -19,6 +19,14 @@ let links = [];
 //Can modify this variable
 var chord_data;
 
+
+window.addEventListener("click",
+  function(e) {
+    if (e.shiftKey) console.log("Shift, yay!");
+  },
+  false);
+
+
 function init_chord(){
 
     d3.select('#chordtooltip').style("opacity", '0');
