@@ -7,6 +7,7 @@ var tags;
 var tags_link;
 
 var currentSelectedTag = 'unselected';
+var selectedTags = [];
 
 var lineWidth, lineHeight, lineInnerHeight, lineInnerWidth;
 var lineMargin = { top: 50, right: 60, bottom: 60, left: 100 };
@@ -18,14 +19,6 @@ let links = [];
 
 //Can modify this variable
 var chord_data;
-
-
-window.addEventListener("click",
-  function(e) {
-    if (e.shiftKey) console.log("Shift, yay!");
-  },
-  false);
-
 
 function init_chord(){
 
@@ -164,8 +157,8 @@ function drawChord()
 
                     });
 
-                    console.log('top5', top5Anime)
-                    console.log('bottom5', bottom5Anime)
+                    // console.log('top5', top5Anime)
+                    // console.log('bottom5', bottom5Anime)
                     // move tooltip to hovered nodes position
 
                     d3.select('#chordtooltip')
@@ -173,15 +166,24 @@ function drawChord()
                         .style("top", (d3.event.pageY - 25) + "px")
                         .style("opacity", '1');
 
+                    // Set all non selected nodes to non low
                     circularG.selectAll(`.link`)
-                    // .style('stroke-width', '1px')
-                        .style('stroke-opacity', '0.1')
+                        .style('stroke-opacity', '0.05')
+
+                    // Set all selected nodes to medium
+                    selectedTags.forEach((d,i) => {
+
+                        // Set selected Node/Link to selected color
+                        circularG.selectAll(`.${d}`)
+                            .style('stroke-opacity', '0.55')
+                            // .style('stroke-opacity', '0.75')
+                    });
+
 
                     // Highlight all links that have hovered tag in it
                     circularG.selectAll(`.${currentTag}`)
-                        // .style('stroke-width', '3px')
                         .style('stroke-opacity', '1')
-    
+
                     d3.select('#tooltip__title').text(`Top 5: ${top5AnimeNames} `);
                     d3.select('#tooltip__data').text(`Bottom 5: ${bottom5AnimeNames}`);
                 })
@@ -194,21 +196,24 @@ function drawChord()
                 })
                 .on('mouseout', function(d,i) {
 
-                    if(currentSelectedTag == 'unselected'){
+                    // if nothing is selected reset all back to default
+                    if(selectedTags.length == 0){
 
                         circularG.selectAll(`.link`)
                             .style('stroke-opacity', '0.4')
-
-
                     }
                     else{
+
+                        // set all Links to lowest opacity when currently selected tag
                         circularG.selectAll(`.link`)
-                            // .style('stroke-width', '1px')
                             .style('stroke-opacity', '0.1')
 
-                        circularG.selectAll(`.${currentSelectedTag}`)
-                            // .style('stroke-width', '3px')
-                            .style('stroke-opacity', '1')
+                        // Go through all selected nodes and highlight
+                        selectedTags.forEach((d,i) => {
+
+                            circularG.selectAll(`.${d}`)
+                                .style('stroke-opacity', '1')
+                        });
                     }
 
                     d3.select('#chordtooltip')
@@ -219,25 +224,60 @@ function drawChord()
                     
                     let currentTag = d3.event.target.attributes.data.value
 
-                    currentSelectedTag=currentTag;
 
-                    circularG.selectAll(`.link`)
-                        // .style('stroke-width', '1px')
-                        .style('stroke-opacity', '0.1')
 
-                    circularG.selectAll(`.${currentTag}`)
-                        .style('stroke-opacity', '1')
+                    if ( d3.event.shiftKey ){ // multi-select
 
-                    // set all nodes to default color
+                        if ( selectedTags.includes(currentTag) ){ // selected again
+                            let index = selectedTags.indexOf(currentTag);
+                            selectedTags.splice(index,1);
+                            // console.info('index', index)
+
+                        }
+                        else{
+                            selectedTags.push(currentTag)
+                        }
+
+
+
+
+
+                    }
+                    else { // single select
+
+                        // if clicked again remove tag
+                        // if new tag is clicked replace with new clicked tag
+                        selectedTags = selectedTags.includes(currentTag) ? [] : [currentTag];
+                        
+                    }
+
+                    // console.info(selectedTags)
+
+                    // set all Nodes/Links to default color
                     circularG.selectAll(`.node`)
                         .style('fill', '#aeedee')
 
-                    // Set selected node to selected color
-                    circularG.selectAll(`.n-${currentTag}`)
-                        // .style('stroke-width', '3px')
-                        .style('fill', '#11abad')
+                    circularG.selectAll(`.link`)
+                        .style('stroke-opacity', '0.05')
+
+
+                    // Go through all selected nodes and highlight
+                    selectedTags.forEach((d,i) => {
+
+                        // Set selected Node/Link to selected color
+                        circularG.selectAll(`.${d}`)
+                            .style('stroke-opacity', '1')
+
+                        circularG.selectAll(`.n-${d}`)
+                            .style('fill', '#11abad')
+                    });
+
+
+
+
+
                         
-                        updatedCharts();
+                        updatedCharts(selectedTags);
                 })
 
 

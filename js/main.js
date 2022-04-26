@@ -36,24 +36,46 @@ document.addEventListener('DOMContentLoaded', () => {
         });
    
         drawBarChart(anime_data);
-        init_chord();
+        
         drawScatterPlot(anime_data);
         drawRadialBarPlot();
+        init_chord();
     });
 });
 
 
-function updatedCharts(selectedTag=currentSelectedTag){
+function doesTagExist(filteringTags, animeTagString){
+
+    let hitCounter = 0;
+    // console.info('animeTagString', animeTagString)
+    // console.info('filteringTags', filteringTags)
+
+    // itterate through tag list
+    filteringTags.forEach((d,i) => {
+        if (animeTagString.replace(/\s/g, "").includes(d)){
+            hitCounter++;
+        }
+    });
+
+    // if all tags were hit send back true
+    return hitCounter == filteringTags.length?  true : false;
+}
+
+
+
+function updatedCharts(selectedTag=selectedTags){
+    console.info (selectedTag)
     let genre_selection = anime_data.filter(function(data){ 
-        if(selectedTag != "unselected"){
-            return(data.genre.replace(/\s/g, "").includes(selectedTag)); 
+        if( selectedTag.length != 0 ){
+            return( doesTagExist(filteringTags=selectedTag, animeTagString=data.genre) );//data.genre.replace(/\s/g, "").includes(selectedTag)); 
         }
 
         return true;
     });
 
-    //drawBarChart(genre_selection);
+
     drawScatterPlot(genre_selection);
     drawBarChart(genre_selection);
-
 }
+
+
