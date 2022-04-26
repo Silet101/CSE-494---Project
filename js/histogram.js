@@ -85,5 +85,20 @@ function drawBarChart(dataset)
                     .attr('y', -60)
                     .attr('transform', 'rotate(-90)')
                     .attr('dy', '15px');
-    
+
+    let tooltip = d3.select('.root').select('#histogramtooltip');
+        
+    area.selectAll('rect')
+        .data(bin)
+        .on('mouseover', function(d, i)
+        {
+            tooltip.html(`Rating: ${i - 1} <br> Members: ${d}`)
+                    .style("left", (d3.event.pageX + 20) + "px")
+                    .style("top", (d3.event.pageY - 25) + "px");
+            tooltip.style('opacity', 1);
+        })
+        .on('mouseout', function()
+        {
+            tooltip.style("opacity", 0);
+        });
 }
