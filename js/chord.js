@@ -168,14 +168,14 @@ function drawChord()
 
                     // Set all non selected nodes to non low
                     circularG.selectAll(`.link`)
-                        .style('stroke-opacity', '0.05')
+                        .style('stroke-opacity', '0.03')
 
                     // Set all selected nodes to medium
                     selectedTags.forEach((d,i) => {
 
                         // Set selected Node/Link to selected color
                         circularG.selectAll(`.${d}`)
-                            .style('stroke-opacity', '0.55')
+                            .style('stroke-opacity', '0.45')
                             // .style('stroke-opacity', '0.75')
                     });
 
@@ -238,16 +238,21 @@ function drawChord()
                             selectedTags.push(currentTag)
                         }
 
-
-
-
-
                     }
                     else { // single select
 
-                        // if clicked again remove tag
-                        // if new tag is clicked replace with new clicked tag
-                        selectedTags = selectedTags.includes(currentTag) ? [] : [currentTag];
+                        // if clicking on an already selected node and there are more then 1 selected then single newly clicked node
+                        if ( selectedTags.length != 0 && selectedTags.includes(currentTag) ){
+                            selectedTags = [currentTag];
+                        }else{
+
+                            // if clicked again remove tag
+                            // if new tag is clicked replace with new clicked tag
+                            selectedTags = selectedTags.includes(currentTag) ? [] : [currentTag];
+
+                        }
+
+
                         
                     }
 
@@ -258,7 +263,7 @@ function drawChord()
                         .style('fill', '#aeedee')
 
                     circularG.selectAll(`.link`)
-                        .style('stroke-opacity', '0.05')
+                        .style('stroke-opacity', '0.03')
 
 
                     // Go through all selected nodes and highlight
