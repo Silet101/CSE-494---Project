@@ -35,30 +35,23 @@ document.addEventListener('DOMContentLoaded', () => {
             d.genre = d['genre_a'];
         });
    
-
-        //System to filer the chord data
-       
-
         drawBarChart(anime_data);
         init_chord();
         drawScatterPlot(anime_data);
+        drawRadialBarPlot();
     });
 });
 
 
-function updatedCharts(selectedTag=currentSelectedTag)
-{
-    //SliceOfLife needs a space for the filtration system!
-
+function updatedCharts(selectedTag=currentSelectedTag){
     let genre_selection = anime_data.filter(function(data){ 
-        if(selectedTag != "unselected")
-        {
+        if(selectedTag != "unselected"){
             return(data.genre.replace(/\s/g, "").includes(selectedTag)); 
         }
 
         return true;
     });
 
-    drawBarChart(genre_selection);
+    //drawBarChart(genre_selection);
     drawScatterPlot(genre_selection);
 }
