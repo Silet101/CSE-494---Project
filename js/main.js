@@ -54,4 +54,6 @@ function updatedCharts(selectedTag=currentSelectedTag){
 
     //drawBarChart(genre_selection);
     drawScatterPlot(genre_selection);
+    drawBarChart(genre_selection);
+
 }
