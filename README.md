@@ -1,4 +1,5 @@
-# Anime Analysis (Tyler Roten, Miguel Garcia-Peguero Austin Frost)
+# Anime Analysis 
+	Authors: Tyler Roten, Miguel Garcia-Peguero, Austin Frost
 ## Overview:
 This project we were tasked with creating a unique analytics dashboard for a given dataset. The data set chosen was [Anime Recommendations Database](https://www.kaggle.com/datasets/CooperUnion/anime-recommendations-database?select=rating.csv) with the goal of exploring popularity trends in anime based on various metrics and find recommendations catered to any user based on their own exploration of the data. The dashboard consists of four graphs all rendered using the D3 javascript library on a web based platform using HTML to present the board and CSS to enhance it. The dashboard primarily focuses around genre exploration and the trends related to anime genres as it can often be a difficult landscape to navigate with so many options available to users. This tool will help guide users to find excellent quality animes catered to whatever taste the user would like and find unexpected trends with there existing favorites.
 
