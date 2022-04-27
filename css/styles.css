@@ -49,6 +49,14 @@ body{
     justify-content: center;
 }
 
+.pieChart{
+  background-color:rgb(255, 188, 44); 
+  /* height:500px; */
+  min-height: 500;
+  min-width: 500;
+  display: flex;
+  justify-content: center;
+}
 
 .histogram{
     background-color:rgb(255, 188, 44); 
