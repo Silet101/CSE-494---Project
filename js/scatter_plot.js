@@ -78,12 +78,14 @@ function drawScatterPlot(data)
         .transition()
         .duration(750)
         .call(yAxis)
+        .attr('class','axis')
 
     const xAxis = d3.axisBottom(x_scale);
     xAxis_g
         .transition()
         .duration(750)
         .call(xAxis)
+        .attr('class','axis')
 
     xaxis_label.text(attribute_x)
     yaxis_label.text(attribute_y)
@@ -185,5 +187,5 @@ function initialize_chart(){
         .attr('class','axis-label')
         .attr('text-anchor','middle')
         .attr('x',innerWidth/2)
-        .attr('y',innerHeight+margin.bottom)
+        .attr('y',innerHeight+40)
 }
