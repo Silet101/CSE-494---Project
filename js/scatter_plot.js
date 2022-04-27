@@ -28,9 +28,9 @@ function drawScatterPlot(data)
     innerWidth = lineWidth - margin.left - margin.right;
     innerHeight = lineHeight - margin.top - margin.bottom;
 
-    scatter_data = data.filter(s => typeof(s[attribute_x])==='number' 
-        && typeof(s[attribute_y])==='number'
-        && typeof(s[attribute_r])==='number'
+    scatter_data = data.filter(s => typeof(s[attribute_x]) === 'number' 
+        && typeof(s[attribute_y]) === 'number'
+        && typeof(s[attribute_r]) === 'number'
         && !isNaN(s[attribute_x])
         && !isNaN(s[attribute_y])
         && !isNaN(s[attribute_r]))
