@@ -43,8 +43,10 @@ body{
 .chordChart{
     background-color:rgb(255, 188, 44); 
     /* height:500px; */
-    min-height: 1000;
-    min-width: 1000;
+    min-height: 1500;
+    min-width: 1500;
+    display: flex;
+    justify-content: center;
 }
 
 

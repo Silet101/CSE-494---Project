@@ -10,7 +10,7 @@ var currentSelectedTag = 'unselected';
 var selectedTags = [];
 
 var lineWidth, lineHeight, lineInnerHeight, lineInnerWidth;
-var lineMargin = { top: 50, right: 60, bottom: 60, left: 100 };
+var lineMargin = { top: 300, right: 300, bottom: 300, left: 300 };
 
 let nodes = [];
 
@@ -27,8 +27,8 @@ function init_chord(){
     svgSimple = d3.select('#chordPlotSVG');
     // svgWidth = svgSimple.node().clientWidth;
     // svgHeight = svgSimple.node().clientHeight;
-    svgWidth = 1000;
-    svgHeight = 1000;
+    svgWidth = 700;
+    svgHeight = 700;
 
     anime_data.forEach(d => {
         d.episodes = +d["episodes"]
