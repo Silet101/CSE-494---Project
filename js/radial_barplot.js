@@ -36,19 +36,18 @@ function drawRadialBarPlot()
         .select('.row')
         .select('.spacer')
         .select('#chord-area')
-        .select('#chordPlotSVG');
+        .select('#chordPlotSVG')
+        .append('g');
 
     area.selectAll('rect')
                     .data(list)
                     .enter()
                     .append('rect')
                     .attr('x', -8) //Rotates the bars
-                    .attr('y', 485) //Radius of circle
+                    .attr('y', 335) //Radius of circle
                     .attr('width', 10) 
                     .attr('height', (d) => y_axis(genre_map.get(d)))
-                    .style('transform', (d) => `translate(500px, 500px)rotate(${x_axis(d) + 11}deg)`) //Translate moves the circle!
+                    .style('transform', (d) => `translate(350px, 350px)rotate(${x_axis(d) - 91}deg)`) //Translate moves the circle!
                     .attr('id', (d) => d)
                     .attr('fill', 'steelblue');
-
-
 }
