@@ -18,7 +18,7 @@ body{
 
 .scatterPlot{
     background-color:rgb(255, 188, 44); 
-    height:500px;
+    height:700px;
     width: 100%
 }
 
@@ -49,11 +49,21 @@ body{
     justify-content: center;
 }
 
+.chordDesc{
+  background-color:rgb(255, 188, 44); 
+  color: #000;
+  min-height: 1500;
+  min-width: 1500;
+  height: 200px;
+  max-height: 200px;
+  display: flex;
+  justify-content: center;
+}
+
 .pieChart{
   background-color:rgb(255, 188, 44); 
-  /* height:500px; */
-  min-height: 500;
-  min-width: 500;
+  height:500px;
+  width: 100%;
   display: flex;
   justify-content: center;
 }
