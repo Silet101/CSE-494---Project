@@ -2,13 +2,13 @@
 var lineWidth, lineHeight, lineInnerHeight, lineInnerWidth;
 var lineMargin = { top: 50, right: 60, bottom: 60, left: 100 };
 
-let bin = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-
 //Can modify this variable
 var histogram_data;
 function drawBarChart(dataset)
 {
     histogram_data = dataset;
+
+    let bin = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     
     let x_attribute = "rating";
     let y_attribute = "members";
