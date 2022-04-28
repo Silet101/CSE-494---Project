@@ -37,7 +37,7 @@ function init_chord(){
     });
 
     
-    console.info('connection_data',connection_data)
+    // console.info('connection_data',connection_data)
     tags = tag_names.map((post, ind) => ({
         'name':post.genre_a
     }))
@@ -48,7 +48,7 @@ function init_chord(){
         'target':ez.genre_b,
         'count':ez.count,
     }))
-    console.info('testing',tags_link);
+    // console.info('testing',tags_link);
 
     links = tags_link;
 
@@ -107,8 +107,8 @@ function drawChord()
         d.polarY = radius * Math.sin(theta)
     });
 
-    console.info('Nodes',nodes)
-    console.log('links',links)
+    // console.info('Nodes',nodes)
+    // console.log('links',links)
 
     // Draw the nodes and links
     circularG.selectAll('.node')
@@ -179,7 +179,7 @@ function drawChord()
                             // .style('stroke-opacity', '0.75')
                     });
 
-
+                    // console.info('current clicked tag', currentTag)
                     // Highlight all links that have hovered tag in it
                     circularG.selectAll(`.${currentTag}`)
                         .style('stroke-opacity', '1')
@@ -242,9 +242,13 @@ function drawChord()
                     else { // single select
 
                         // if clicking on an already selected node and there are more then 1 selected then single newly clicked node
-                        if ( selectedTags.length != 0 && selectedTags.includes(currentTag) ){
+                        if ( selectedTags.length > 1 && selectedTags.includes(currentTag) ){
                             selectedTags = [currentTag];
-                        }else{
+                        }
+                        else if ( selectedTags.length == 1 && selectedTags.includes(currentTag) ){
+                            selectedTags = [];
+                        }
+                        else{
 
                             // if clicked again remove tag
                             // if new tag is clicked replace with new clicked tag
