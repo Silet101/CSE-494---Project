@@ -15,10 +15,13 @@ function drawBarChart(dataset)
 
     histogram_data.forEach(function(data)
     {
-        bin[Math.floor(+data[x_attribute])] +=  Math.floor(Math.log10(+data[y_attribute]));
+        bin[Math.floor(+data[x_attribute])] +=  Math.floor(+data[y_attribute]);
     });
 
-    
+    for(var i = 0; i < 12; i++)
+    {
+        bin[i] = Math.log10(bin[i]);
+    }
 
     //If called after initialization, remove the svg and regenerate
     d3.select('.root')
@@ -82,7 +85,7 @@ function drawBarChart(dataset)
 
 
     histogram_area.append('text')
-                    .text('Members')
+                    .text('Members (Log10)')
                     .attr('x', -230)
                     .attr('y', -60)
                     .attr('transform', 'rotate(-90)')
@@ -94,7 +97,7 @@ function drawBarChart(dataset)
         .data(bin)
         .on('mouseover', function(d, i)
         {
-            tooltip.html(`Rating: ${i - 1} <br> Members: ${d}`)
+            tooltip.html(`Rating: ${i - 1} <br> Members: ${Math.ceil(Math.pow(10, d))}`)
                     .style("left", (d3.event.pageX + 20) + "px")
                     .style("top", (d3.event.pageY - 25) + "px");
             tooltip.style('opacity', 1);
