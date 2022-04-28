@@ -66,7 +66,7 @@ function drawPieChart(dataset)
 
     var color = d3.scaleOrdinal()
                     .domain(category_data)
-                    .range(['#ffd384','#94ebcd','#fbaccc','#d3e0ea','#fa7f72', '#ffdfd3']);
+                    .range(['#003f5c','#444e86','#955196','#dd5182','#ff6e54', '#ffa600']);
 
     var pie = d3.pie()
                 .value(d => d.number);
