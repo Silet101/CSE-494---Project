@@ -135,7 +135,7 @@ body{
   } */
 
 
-  #chordtooltip {
+  /* #chordtooltip {
     border:1px solid gray;
     border-radius:5px;
     background-color: rgba(255, 255, 255, 0.384);
@@ -157,6 +157,18 @@ body{
   }
 
   #histogramtooltip {
+    border:1px solid gray;
+    border-radius:5px;
+    background-color: rgba(255, 255, 255, 0.384);
+    color: #000;
+    position:absolute;
+    padding:10px;
+    pointer-events: none;
+    opacity: 0;
+  } */
+
+
+  .tooltip {
     border:1px solid gray;
     border-radius:5px;
     background-color: rgba(255, 255, 255, 0.384);

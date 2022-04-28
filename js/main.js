@@ -35,6 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
             d.genre = d['genre_a'];
         });
    
+        initPieChart();
+        drawPieChart(anime_data);
         drawBarChart(anime_data);
         
         drawScatterPlot(anime_data);
@@ -76,6 +78,8 @@ function updatedCharts(selectedTag=selectedTags){
 
     drawScatterPlot(genre_selection);
     drawBarChart(genre_selection);
+    drawPieChart(genre_selection);
+
 }
 
 

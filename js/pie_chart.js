@@ -4,25 +4,31 @@ var lineMargin = { top: 50, right: 60, bottom: 60, left: 100 };
 
 //Can modify this variable
 var pie_chart_data;
+
+var area;
 /*var anime_data
 var connection_data
 var genre_list*/
+
+function initPieChart(){
+    //Will need to change this to the tool tip area
+    area = d3.select('#piePlotSVG') 
+        .attr('width', '300px') //Will need to change these dimensions!
+        .attr('height', '300px')
+        .attr('transform', 'translate(155, 250)');
+
+    area.append('g')
+}
 
 
 //Pie chart will require a subset of data to be passed in order for it to work properly
 function drawPieChart(dataset)
 {
-    //Will need to change this to the tool tip area
-    let area = d3.select('.root')
-    .select('.container')
-    .select('.row')
-    .select('.piechart-area')
-    .select('.piechart')
-    .append('svg') 
-        .attr('width', '100%') //Will need to change these dimensions!
-        .attr('height', '100%');
+
 
     let subset_data = dataset
+
+    console.info('pie data', subset_data)
 
     let category_data = [{type:"Movie", number: 0},
                             {type:"TV", number: 0}, 
@@ -61,34 +67,65 @@ function drawPieChart(dataset)
 
     var arc = d3.arc()
                     .innerRadius(0)
-                    .outerRadius(100)
+                    .outerRadius(200)
 
     var pie_labels = d3.arc()
                         .innerRadius(50)
-                        .outerRadius(100);
+                        .outerRadius(200);
         
     
     const arcs = pie(category_data);
 
-    area.append('g')
-        .attr('transform', 'translate(360, 120)');
+    
+        
         
     
     area.select('g')
-            .attr('stroke', 'white')
+            .attr('stroke', 'black')
             .selectAll('path')
             .data(arcs)
-            .enter().append('path')
-            .attr('fill', d => color(d.value))
-            .attr("d", arc);
+            // .enter().append('path')
+            .join('path')
+            .attr('fill', d => color(d.data.type))
+            .attr("d", arc)
+            .on('mouseover', function(d,i) {
+
+                // console.info('hover',d.data);
+                // when entering pie chart update tooltip location relative to mouse
+                d3.select('#pietooltip')
+                    .style("left", (d3.event.pageX + 20) + "px")
+                    .style("top", (d3.event.pageY - 25) + "px")
+                    .style("opacity", '1');
+
+                d3.select('#tooltip_pie__title').text(`Type: ${d.data.type} `);
+                d3.select('#tooltip_pie__data').text(`Value: ${d.data.number}`);
+            })
+            .on('mousemove', function(d,i) {
+
+                // when moves update tooltip location relative to mouse
+                d3.select('#pietooltip')
+                    .style("left", (d3.event.pageX + 20) + "px")
+                    .style("top", (d3.event.pageY - 25) + "px")
+                    
+
+            })
+            .on('mouseout', function(d,i) {
+
+                // when mouse leaves the pie chart hide tooltip
+                d3.select('#pietooltip')
+                    .style("opacity", '0')
+
+            });
                             
     
     area.select('g').selectAll('text')
                     .data(arcs)
-                    .enter()
-                    .append('text')
-                    .text(function(d){return d.value})
-                    .attr('transform', function(d){return `translate(${pie_labels.centroid(d)})`})
+                    .join('text')
+                    // .append('text')
+                    .text(function(d){ return d.data.type})
+                    .attr('transform', function(d){return `translate(${pie_labels.centroid(d)}) rotate(35)`})
                     .style('text-anchor', 'middle')
+                    .style('pointer-events', 'none')
+                    // .attr('transform', 'rotate(1)')
                     .style('font-size', 17);
 }

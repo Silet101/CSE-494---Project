@@ -31,7 +31,7 @@
                     <!-- PIE CHART -->
                     <div class="col-6" style="padding-left:0;">
                         <div id="pieChart-area" class="pieChart cardShadowBox">
-                            <svg id="piePlotSVG" width="1000px" height="1000px"></svg>
+                            <svg id="piePlotSVG" width="1000px" height="1000px" style="overflow:visible"></svg>
                         </div>
                     </div>
 
@@ -93,9 +93,7 @@
                             </select>
                         </div>
 
-
                     </div>
-
 
                   </div>
 
@@ -118,18 +116,23 @@
             </div>
 
 
-            <div id='chordtooltip'>
+            <div id='chordtooltip' class="tooltip">
 
-                <p id='tooltip__title'>0</p>
-
+                <p id='tooltip__title'></p>
                 <p id='tooltip__data'></p>
                 
             </div>
-                <div id='scattertooltip'>  
+
+            <div id='pietooltip' class="tooltip">
+
+                <p id='tooltip_pie__title'></p>
+                <p id='tooltip_pie__data'></p>
+                
             </div>
 
+            <div id='scattertooltip' class="tooltip">  </div>
                  
-            <div id='histogramtooltip'></div>
+            <div id='histogramtooltip' class="tooltip"></div>
     </body>
 
 </html>
