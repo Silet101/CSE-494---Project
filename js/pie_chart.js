@@ -17,8 +17,14 @@ function initPieChart(){
         .attr('height', '300px')
         .attr('transform', 'translate(155, 250)');
 
-    area.append('g')
-}
+    let pie_loc = area.append('g')
+    area.append('text')
+                    .text('Media Types')
+                    .attr('x', -40)
+                    .attr('y', -240)
+                    .attr('dy', '20px')
+                    .attr('font-weight', 1000);
+}  
 
 
 //Pie chart will require a subset of data to be passed in order for it to work properly
