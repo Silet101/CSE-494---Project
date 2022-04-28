@@ -28,7 +28,7 @@ function drawPieChart(dataset)
 
     let subset_data = dataset
 
-    console.info('pie data', subset_data)
+    //console.info('pie data', subset_data)
 
     let category_data = [{type:"Movie", number: 0},
                             {type:"TV", number: 0}, 

@@ -15,8 +15,10 @@ function drawBarChart(dataset)
 
     histogram_data.forEach(function(data)
     {
-        bin[Math.floor(+data[x_attribute])] += +data[y_attribute];
+        bin[Math.floor(+data[x_attribute])] +=  Math.floor(Math.log10(+data[y_attribute]));
     });
+
+    
 
     //If called after initialization, remove the svg and regenerate
     d3.select('.root')
