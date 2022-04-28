@@ -19,8 +19,8 @@ function initPieChart(){
 
     let pie_loc = area.append('g')
     area.append('text')
-                    .text('Media Types')
-                    .attr('x', -40)
+                    .text('Media Type Distribution')
+                    .attr('x', -85)
                     .attr('y', -240)
                     .attr('dy', '20px')
                     .attr('font-weight', 1000);
